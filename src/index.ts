@@ -3,7 +3,7 @@ import { Agent, AgentId } from 'p2p-signaling';
 import { messageListenerForSocket } from 'p2p-signaling/lib/server';
 
 export interface Env {
-	WEBSOCKET_HIBERNATION_SERVER: DurableObjectNamespace<WebSocketHibernationServer>;
+	P2P_SIGNALING_SERVER: DurableObjectNamespace<P2pSignalingServer>;
 }
 
 // Worker
@@ -21,8 +21,8 @@ export default {
 
 			// This example will refer to the same Durable Object,
 			// since the name "foo" is hardcoded.
-			let id = env.WEBSOCKET_HIBERNATION_SERVER.idFromName('foo');
-			let stub = env.WEBSOCKET_HIBERNATION_SERVER.get(id);
+			let id = env.P2P_SIGNALING_SERVER.idFromName('foo');
+			let stub = env.P2P_SIGNALING_SERVER.get(id);
 
 			return stub.fetch(request);
 		}
@@ -38,7 +38,7 @@ export default {
 };
 
 // Durable Object
-export class WebSocketHibernationServer extends DurableObject {
+export class P2pSignalingServer extends DurableObject {
 	agents: Map<AgentId, [Agent, WebSocket]> = new Map();
 
 	async fetch(request: Request): Promise<Response> {
