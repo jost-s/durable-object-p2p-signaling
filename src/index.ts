@@ -1,6 +1,5 @@
 import { DurableObject } from 'cloudflare:workers';
-import { Agent, AgentId } from 'p2p-signaling';
-import { messageListenerForSocket } from 'p2p-signaling/lib/server';
+import { Agent, AgentId, messageListenerForSocket } from 'p2p-signaling';
 
 export interface Env {
 	P2P_SIGNALING_SERVER: DurableObjectNamespace<P2pSignalingServer>;
